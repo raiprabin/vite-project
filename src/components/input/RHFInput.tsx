@@ -10,7 +10,7 @@ type InputSize = 'small' | 'medium' | 'large';
 export type InputVariant = 'normal' | 'warning' | 'disabled';
 
 export const inputBaseClasses =
-  'relative inline-flex w-full rounded leading-none transition-colors ease-in-out placeholder-gray-500 text-gray-700 border hover:border-blue-400 focus:outline-none  min-h-[48px]';
+  'relative inline-flex w-full rounded-lg leading-none transition-colors ease-in-out placeholder-gray-500 text-gray-700 border hover:border-blue-400 focus:outline-none  min-h-[48px]';
 
 const inputSizeClasses: Record<InputSize, string> = {
   small: 'py-1 px-2 text-sm',

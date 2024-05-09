@@ -7,6 +7,10 @@ import Breadcrumbs from "@/components/breadcum";
 import { generatePathForBreadcrumb } from "@/utils/helpers/ui.helper";
 import Button from "@/components/button/Button";
 import { HomeSvg } from "@/assets/svgIcon";
+import { AddInvoiceInformation } from "./add-invoice-information";
+import { FormProvider, useForm } from "react-hook-form";
+import { CreateAInvoiceValidationSchema, TCreateAInvoiceValidation } from "@/schemas/invoices";
+import { zodResolver } from '@hookform/resolvers/zod';
 
 export const InvoiceMainPage = () => {
   return (
@@ -81,8 +85,14 @@ const InvoicesTableComponent = () => {
       paymentMethod: "Credit Card",
     },
   ];
-
+  const methods = useForm<TCreateAInvoiceValidation>({
+    mode: 'onChange',
+    resolver: zodResolver(CreateAInvoiceValidationSchema),
+    shouldUnregister: false,
+  });
   return (
+    <FormProvider {...methods}>
+
     <HUITabs
       selectedTab={(() => {
         switch (activeTicketsTab) {
@@ -121,9 +131,10 @@ const InvoicesTableComponent = () => {
         {
           id: 1,
           title: "Draft",
-          panel: <InvoicedTickets invoices={invoices} />,
+          panel: <AddInvoiceInformation />,
         },
       ]}
     />
+    </FormProvider>
   );
 };
