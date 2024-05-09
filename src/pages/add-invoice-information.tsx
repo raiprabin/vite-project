@@ -21,8 +21,8 @@ export const AddInvoiceInformation = ({
   return (
     <div className="bg-danger-0 rounded">
       <div className="p-6 border-b border-neutral-100">
-        <section className="grid grid-cols-2 gap-y-6 gap-x-10">
-          <div className={`input-field w-full`}>
+        <section className="grid grid-cols-2 gap-y-4 gap-x-8">
+          <div className={`input-field w-full col-span-2`}>
             <RHFInput
               id="invoice_id"
               label="Invoice Id"
@@ -67,7 +67,7 @@ export const AddInvoiceInformation = ({
             />
           </div>
           
-          <div className={`input-field w-full`}>
+          <div className={`input-field w-full col-span-2`}>
             <SELECTInput
               id="customer"
               label="Customer"
