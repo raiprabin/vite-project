@@ -19,7 +19,7 @@ type InputSize = "small" | "medium" | "large";
 export type InputVariant = "normal" | "warning" | "disabled";
 
 export const inputBaseClasses =
-  "relative inline-flex w-full rounded-lg leading-none ease-in-out focus:text-neutral-900 focus:ring-0 text-neutral-300 border min-h-[48px]";
+  "relative inline-flex w-full rounded-lg leading-none ease-in-out focus:ring-0 border min-h-[48px] ";
 
 const inputSizeClasses: Record<InputSize, string> = {
   small: "py-1 px-2 text-sm",

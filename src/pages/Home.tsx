@@ -11,6 +11,10 @@ import { AddInvoiceInformation } from "./add-invoice-information";
 import { FormProvider, useForm } from "react-hook-form";
 import { CreateAInvoiceValidationSchema, TCreateAInvoiceValidation } from "@/schemas/invoices";
 import { zodResolver } from '@hookform/resolvers/zod';
+import { ComboboxDemo } from "@/components/MultiBox/comboBox";
+import Invoice, { InvoiceItem } from "./invoice-detail";
+import { useState } from "react";
+import InvoiceForm from "./invoice-form";
 
 export const InvoiceMainPage = () => {
   return (
@@ -90,6 +94,20 @@ const InvoicesTableComponent = () => {
     resolver: zodResolver(CreateAInvoiceValidationSchema),
     shouldUnregister: false,
   });
+  const [invoiceItems, setInvoiceItems] = useState<InvoiceItem[]>([]);
+  const [invoiceNumber, setInvoiceNumber] = useState('');
+  const [date, setDate] = useState('');
+  const [customerName, setCustomerName] = useState('');
+
+  const handleAddItem = (item: InvoiceItem) => {
+    setInvoiceItems([...invoiceItems, item]);
+  };
+
+  const handleUpdateDetails = (invoiceNumber: string, date: string, customerName: string) => {
+    setInvoiceNumber(invoiceNumber);
+    setDate(date);
+    setCustomerName(customerName);
+  };
   return (
     <FormProvider {...methods}>
 
@@ -131,10 +149,20 @@ const InvoicesTableComponent = () => {
         {
           id: 1,
           title: "Draft",
-          panel: <AddInvoiceInformation />,
+          panel: <div className="min-h-screen bg-gray-100 p-4">
+          <InvoiceForm onAddItem={handleAddItem} onUpdateDetails={handleUpdateDetails} />
+          <Invoice
+            items={invoiceItems}
+            invoiceNumber={invoiceNumber}
+            date={date}
+            customerName={customerName}
+            invoices={invoices} 
+          />
+        </div>,
         },
       ]}
     />
     </FormProvider>
+    
   );
 };
